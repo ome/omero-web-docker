@@ -1,0 +1,8 @@
+- hosts: localhost
+  roles:
+  - role: nginx
+  - role: omero-web-runtime
+  vars:
+  - ice_version: "3.6"
+  # TODO: hack to prevent nginx bveing restarted (requires systemd)
+  - nginx_keep_default_configs: True
