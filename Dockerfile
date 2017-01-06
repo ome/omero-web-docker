@@ -4,7 +4,7 @@ MAINTAINER ome-devel@lists.openmicroscopy.org.uk
 # TODO: Use separate Nginx container
 
 RUN yum -y install epel-release && \
-    yum -y install ansible unzip
+    yum -y install ansible git unzip
 
 ARG INFRASTRUCTURE_BRANCH=master
 RUN cd /opt && \
@@ -14,6 +14,7 @@ RUN cd /opt && \
 ADD omero-grid-web-deps.yml /opt/infrastructure-${INFRASTRUCTURE_BRANCH}/ansible
 
 RUN cd /opt/infrastructure-${INFRASTRUCTURE_BRANCH}/ansible && \
+    ansible-galaxy install -r requirements.yml && \
     ansible-playbook omero-grid-web-deps.yml
 
 RUN pip install omego
