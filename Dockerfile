@@ -6,9 +6,9 @@ MAINTAINER ome-devel@lists.openmicroscopy.org.uk
 RUN yum -y install epel-release && \
     yum -y install ansible unzip
 
-ARG INFRASTRUCTURE_BRANCH=ansible-2.2
+ARG INFRASTRUCTURE_BRANCH=master
 RUN cd /opt && \
-    curl -L -o infrastructure.zip https://github.com/manics/infrastructure/archive/${INFRASTRUCTURE_BRANCH}.zip && \
+    curl -L -o infrastructure.zip https://github.com/openmicroscopy/infrastructure/archive/${INFRASTRUCTURE_BRANCH}.zip && \
     unzip infrastructure.zip && \
     rm infrastructure.zip
 ADD omero-grid-web-deps.yml /opt/infrastructure-${INFRASTRUCTURE_BRANCH}/ansible
