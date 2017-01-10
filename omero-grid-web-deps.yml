@@ -1,7 +1,7 @@
 - hosts: localhost
   roles:
-  - role: nginx
-  - role: omero-web-runtime
+  - role: openmicroscopy.nginx
+  - role: openmicroscopy.omero-web-runtime
   vars:
   - ice_version: "3.6"
   # TODO: hack to prevent nginx bveing restarted (requires systemd)

@@ -1,0 +1,19 @@
+# External Ansible roles required by this repository
+
+- src: openmicroscopy.basedeps
+  version: 1.0.0
+
+- src: openmicroscopy.ice
+  version: 1.0.0
+
+- src: openmicroscopy.nginx
+  version: 1.0.0
+
+- src: openmicroscopy.omero-python-deps
+  version: 1.0.0
+
+- src: openmicroscopy.omero-web-runtime
+  version: 1.0.0
+
+- src: openmicroscopy.redis
+  version: 1.0.0
