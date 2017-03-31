@@ -44,6 +44,11 @@ RUN mkdir -p nginx/cache nginx/log nginx/run nginx/temp OMERO.server/var
 
 ADD run.sh /home/omero/
 
+# TODO: Remove me once the role is updated.
+USER root
+RUN pip install -r /home/omero/OMERO.server/share/web/requirements-py27.txt
+USER omero
+
 EXPOSE 8080
 VOLUME ["/home/omero/nginx", "/home/omero/OMERO.server/var"]
 
