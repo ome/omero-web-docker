@@ -11,7 +11,7 @@ omero=/home/omero/OMERO.server/bin/omero
 
 MASTER_ADDR=${MASTER_ADDR:-}
 if [ -z "$MASTER_ADDR" ]; then
-    MASTER_ADDR=${MASTER_PORT_4064_TCP_ADDR:-}
+    MASTER_ADDR=master
 fi
 if [ -n "$MASTER_ADDR" ]; then
     $omero config set omero.web.server_list "[[\"$MASTER_ADDR\", 4064, \"omero\"]]"
@@ -25,13 +25,6 @@ if stat -t /config/* > /dev/null 2>&1; then
         echo "Loading $f"
         $omero load "$f"
     done
-fi
-
-mkdir -p /home/omero/nginx/cache /home/omero/nginx/log /home/omero/nginx/temp
-NGINX_OMERO=/etc/nginx/conf.d/omero-web.conf
-if [ ! -f $NGINX_OMERO ]; then
-    echo "Creating $NGINX_OMERO"
-    $omero web config --http 8080 nginx > $NGINX_OMERO
 fi
 
 echo "Starting OMERO.web"
