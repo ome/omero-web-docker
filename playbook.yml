@@ -1,0 +1,8 @@
+- hosts: localhost
+  roles:
+  - role: openmicroscopy.omero-web
+  vars:
+    ice_version: "3.6"
+    ice_install_devel: False
+    omero_web_systemd_setup: False
+    omero_web_setup_nginx: False
