@@ -1,16 +1,19 @@
 #!/bin/bash
-# If omero.web.server_list is unset but the variable MASTER_ADDR exists then
-# use this to configure the server list
+# Use omero.web.server_list if set, othen OMEROHOST if set, defaulting to a
+# single server of omero
+# Also default to binding web to all IPs
 
 set -eu
 
 omero=/opt/omero/web/OMERO.web/bin/omero
 
+OMEROHOST=${OMEROHOST:-omero}
 CONFIG_omero_web_server__list=${CONFIG_omero_web_server__list:-}
-MASTER_ADDR=${MASTER_ADDR:-}
-if [ -z "$CONFIG_omero_web_server__list" -a -n "$MASTER_ADDR" ]; then
-    $omero config set omero.web.server_list "[[\"$MASTER_ADDR\", 4064, \"omero\"]]"
+
+if [ -z "$CONFIG_omero_web_server__list" ]; then
+    $omero config set omero.web.server_list "[[\"$OMEROHOST\", 4064, \"omero\"]]"
 fi
+
 CONFIG_omero_web_application__server_host=${CONFIG_omero_web_application__server_host:-}
 if [ -z "$CONFIG_omero_web_application__server_host" ]; then
     $omero config set omero.web.application_server.host "0.0.0.0"
