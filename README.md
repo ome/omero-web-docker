@@ -7,10 +7,10 @@ A CentOS 7 based Docker image for OMERO.web.
 Running the image
 -----------------
 
-To run the Docker image you can set a single OMERO.server to connect to by defining `MASTER_ADDR`:
+To run the Docker image you can set a single OMERO.server to connect to by defining `OMEROHOST`:
 
     docker run -d --name omero-web
-        -e MASTER_ADDR=omero.example.org \
+        -e OMEROHOST=omero.example.org \
         -p 4080:4080 \
         openmicroscopy/omero-web
 
