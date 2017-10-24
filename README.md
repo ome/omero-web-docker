@@ -32,7 +32,7 @@ Since `.` is not allowed in a variable name `.` must be replaced by `_`, and `_`
 Additional configuration files for OMERO can be provided by mounting files into `/opt/omero/web/config/`.
 Files will be loaded with `omero load`.
 
-See https://github.com/manics/omero-server-docker for more details on configuration.
+See https://github.com/openmicroscopy/omero-server-docker for more details on configuration.
 
 
 Default volumes
