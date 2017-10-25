@@ -4,8 +4,10 @@ OMERO.web Docker
 A CentOS 7 based Docker image for OMERO.web.
 
 
-Running the image
------------------
+Standalone image
+----------------
+
+The quickest way to obtain a running OMERO.web server is to use the standalone image which uses the [WhiteNoise package to avoid the need for Nginx](http://whitenoise.evans.io/en/stable/).
 
 To run the Docker image you can set a single OMERO.server to connect to by defining `OMEROHOST`:
 
@@ -21,6 +23,13 @@ Alternative all configuration options can be set using environment variables, fo
         -e CONFIG_omero_web_debug=true \
         -p 4080:4080 \
         openmicroscopy/omero-web
+
+
+Minimal OMERO.web image
+-----------------------
+
+This is a minimal OMERO.web image which requires additional configuration for serving Django static files.
+For example, you can use https://github.com/dpwrussell/omero-nginx-docker
 
 
 Configuration
