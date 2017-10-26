@@ -4,17 +4,20 @@ OMERO.web Docker
 A CentOS 7 based Docker image for OMERO.web.
 
 
-Standalone image
-----------------
+Standalone image: omero-web-standalone
+--------------------------------------
 
-The quickest way to obtain a running OMERO.web server is to use the standalone image which uses the [WhiteNoise package to avoid the need for Nginx](http://whitenoise.evans.io/en/stable/).
+The quickest way to obtain a running OMERO.web server is to use
+the [standalone image](https://hub.docker.com/r/openmicroscopy/omero-web-standalone/)
+which uses the [WhiteNoise package](http://whitenoise.evans.io/en/stable/)
+to avoid the need for Nginx.
 
 To run the Docker image you can set a single OMERO.server to connect to by defining `OMEROHOST`:
 
     docker run -d --name omero-web \
         -e OMEROHOST=omero.example.org \
         -p 4080:4080 \
-        openmicroscopy/omero-web
+        openmicroscopy/omero-web-standalone
 
 Alternative all configuration options can be set using environment variables, for example:
 
@@ -22,13 +25,14 @@ Alternative all configuration options can be set using environment variables, fo
         -e CONFIG_omero_web_server__list='[["omero.example.org", 4064, "omero"]]' \
         -e CONFIG_omero_web_debug=true \
         -p 4080:4080 \
-        openmicroscopy/omero-web
+        openmicroscopy/omero-web-standalone
 
 
-Minimal OMERO.web image
------------------------
+Minimal OMERO.web image: omero-web
+----------------------------------
 
-This is a minimal OMERO.web image which requires additional configuration for serving Django static files.
+[omero-web](https://hub.docker.com/r/openmicroscopy/omero-web/)
+is a minimal OMERO.web image which requires additional configuration for serving Django static files.
 For example, you can use https://github.com/dpwrussell/omero-nginx-docker
 
 
