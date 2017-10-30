@@ -17,7 +17,7 @@ RUN curl -L -o /usr/local/bin/dumb-init \
     https://github.com/Yelp/dumb-init/releases/download/v1.2.0/dumb-init_1.2.0_amd64 && \
     chmod +x /usr/local/bin/dumb-init
 ADD entrypoint.sh /usr/local/bin/
-ADD 50-config.py 60-default-web-config.sh 99-run.sh /startup/
+ADD 50-config.py 60-default-web-config.sh 98-cleanprevious.sh 99-run.sh /startup/
 
 USER omero-web
 RUN mkdir /opt/omero/web/OMERO.web/var
