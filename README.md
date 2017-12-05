@@ -39,7 +39,7 @@ For example, you can use https://github.com/dpwrussell/omero-nginx-docker
 Configuration
 -------------
 
-All [OMERO configuration properties](www.openmicroscopy.org/site/support/omero/sysadmins/config.html) can be set be defining environment variables `CONFIG_omero_property_name=`.
+All [OMERO configuration properties](https://docs.openmicroscopy.org/latest/omero/sysadmins/config.html) can be set be defining environment variables `CONFIG_omero_property_name=`.
 Since `.` is not allowed in a variable name `.` must be replaced by `_`, and `_` by `__`.
 
 Additional configuration files for OMERO can be provided by mounting files into `/opt/omero/web/config/`.
