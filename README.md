@@ -3,6 +3,7 @@ OMERO.web Docker
 
 A CentOS 7 based Docker image for OMERO.web.
 
+Also see [SUPPORT.md](./SUPPORT.md)
 
 Standalone image: omero-web-standalone
 --------------------------------------
