@@ -7,7 +7,7 @@
   version: 2.1.1
 
 - src: openmicroscopy.omego
-  version: 0.1.0
+  version: 0.1.1
 
 - src: openmicroscopy.omero-common
   version: 0.1.0
