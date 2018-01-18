@@ -22,6 +22,7 @@ usage:
 	@echo "  make VERSION=x.y.z build                          #   Build and tag images for $(REPO) hub repo"
 	@echo "  make VERSION=x.y.z push                           #   Push images to $(REPO) hub repo"
 
+
 tag:
 ifndef VERSION
 	$(error VERSION is undefined)
@@ -56,26 +57,37 @@ build:
 ifndef VERSION
 	$(error VERSION is undefined)
 endif
+ifndef BUILD
+	$(eval BUILD=0)
+endif
 	docker build -t $(REPO)/omero-web:latest .
+	docker tag $(REPO)/omero-web:latest $(REPO)/omero-web:$(VERSION)-$(BUILD)
 	docker tag $(REPO)/omero-web:latest $(REPO)/omero-web:$(VERSION)
 	@MAJOR_MINOR=$(shell echo $(VERSION) | cut -f1-2 -d. );\
 	docker tag $(REPO)/omero-web:latest $(REPO)/omero-web:$$MAJOR_MINOR
 
 	docker build -t $(REPO)/omero-web-standalone:latest standalone
+	docker tag $(REPO)/omero-web-standalone:latest $(REPO)/omero-web-standalone:$(VERSION)-$(BUILD)
 	docker tag $(REPO)/omero-web-standalone:latest $(REPO)/omero-web-standalone:$(VERSION)
 	@MAJOR_MINOR=$(shell echo $(VERSION) | cut -f1-2 -d. );\
 	docker tag $(REPO)/omero-web-standalone:latest $(REPO)/omero-web-standalone:$$MAJOR_MINOR
+
 
 push:
 ifndef VERSION
 	$(error VERSION is undefined)
 endif
+ifndef BUILD
+	$(eval BUILD=0)
+endif
 	docker push $(REPO)/omero-web:latest
+	docker push $(REPO)/omero-web:$(VERSION)-$(BUILD)
 	docker push $(REPO)/omero-web:$(VERSION)
 	@MAJOR_MINOR=$(shell echo $(VERSION) | cut -f1-2 -d. );\
 	docker push $(REPO)/omero-web:$$MAJOR_MINOR
 
 	docker push $(REPO)/omero-web-standalone:latest
+	docker push $(REPO)/omero-web-standalone:$(VERSION)-$(BUILD)
 	docker push $(REPO)/omero-web-standalone:$(VERSION)
 	@MAJOR_MINOR=$(shell echo $(VERSION) | cut -f1-2 -d. );\
 	docker push $(REPO)/omero-web-standalone:$$MAJOR_MINOR
