@@ -44,7 +44,7 @@ All [OMERO configuration properties](https://docs.openmicroscopy.org/latest/omer
 Since `.` is not allowed in a variable name `.` must be replaced by `_`, and `_` by `__`.
 
 Additional configuration files for OMERO can be provided by mounting files into `/opt/omero/web/config/`.
-Files will be loaded with `omero load`.
+Files ending with `.omero` will be loaded with `omero load`.
 
 See https://github.com/openmicroscopy/omero-server-docker for more details on configuration.
 
