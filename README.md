@@ -12,6 +12,8 @@ The quickest way to obtain a running OMERO.web server is to use
 the [standalone image](https://hub.docker.com/r/openmicroscopy/omero-web-standalone/)
 which uses the [WhiteNoise package](http://whitenoise.evans.io/en/stable/)
 to avoid the need for Nginx.
+This image also includes several OMERO.web plugins that are disabled by default.
+If you want to use them you see the relevant plugins documentation for configuration instructions.
 
 To run the Docker image you can set a single OMERO.server to connect to by defining `OMEROHOST`:
 
