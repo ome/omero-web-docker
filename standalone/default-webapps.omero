@@ -1,0 +1,19 @@
+# Avoid port-forwarding problems by always using secure port
+config set -- omero.web.secure True
+
+# whitenoise
+config append -- omero.web.middleware '{"index": 0, "class": "whitenoise.middleware.WhiteNoiseMiddleware"}'
+
+# omero-figure
+config append -- omero.web.apps '"omero_figure"'
+config append -- omero.web.ui.top_links '["Figure", "figure_index", {"title": "Open Figure in new tab", "target": "_blank"}]'
+config append -- omero.web.open_with '["omero_figure", "new_figure", {"supported_objects": ["images"], "target": "_blank", "label": "OMERO.figure"}]'
+
+# omero-iviewer
+config append -- omero.web.apps '"omero_iviewer"'
+config set -- omero.web.viewer.view omero_iviewer.views.index
+config append -- omero.web.open_with '["omero_iviewer", "omero_iviewer_index", {"supported_objects":["images", "dataset", "well"], "script_url": "omero_iviewer/openwith.js", "label": "OMERO.iviewer"}]'
+
+# omero-parade
+config append -- omero.web.apps '"omero_parade"'
+config append -- omero.web.ui.center_plugins '["Parade", "omero_parade/init.js.html", "omero_parade"]'
