@@ -15,11 +15,11 @@ to avoid the need for Nginx.
 This image also includes these OMERO.web plugins with a default configuration:
 - [figure](https://www.openmicroscopy.org/omero/figure/)
 - [iviewer](https://www.openmicroscopy.org/omero/iviewer/)
+- [mapr](https://pypi.org/project/omero-mapr/)
 - [parade](https://pypi.org/project/omero-parade/)
 
 The following plugins are installed but disabled:
 - [fpbioimage](https://pypi.org/project/omero-fpbioimage/)
-- [mapr](https://pypi.org/project/omero-mapr/)
 - [autotag](https://pypi.org/project/omero-webtagging-autotag/)
 - [tagsearch](https://pypi.org/project/omero-webtagging-tagsearch/)
 
