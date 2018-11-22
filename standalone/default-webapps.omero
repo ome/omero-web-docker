@@ -1,10 +1,4 @@
-# Avoid port-forwarding problems by always using secure port
-config set -- omero.web.secure true
-
-# Allow connecting to different minor releases
-# When https://github.com/openmicroscopy/openmicroscopy/pull/5913 is released
-# this can be removed
-config set -- omero.web.check_version false
+# OMERO.web configuration
 
 # whitenoise
 config append -- omero.web.middleware '{"index": 0, "class": "whitenoise.middleware.WhiteNoiseMiddleware"}'
