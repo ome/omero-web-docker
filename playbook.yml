@@ -6,3 +6,12 @@
     ice_install_devel: False
     omero_web_systemd_setup: False
     omero_web_setup_nginx: False
+    # These defaults can be overriden at runtime
+    omero_web_config_set:
+      omero.web.application_server.host: 0.0.0.0
+      # Allow connecting to different minor releases
+      # When https://github.com/openmicroscopy/openmicroscopy/pull/5913 is
+      # released this can be removed
+      omero.web.check_version: "false"
+      omero.web.server_list: [[omero, 4064, omero]]
+      omero.web.secure: "true"
