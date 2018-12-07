@@ -17,6 +17,6 @@ RUN yum install -y -q \
         omero-webtagging-tagsearch \
         'whitenoise<4'
 
-ADD default-webapps.omero /opt/omero/web/config/
+ADD 01-default-webapps.omero /opt/omero/web/config/
 
 USER omero-web
