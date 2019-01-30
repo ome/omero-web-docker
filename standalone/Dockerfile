@@ -2,6 +2,18 @@ FROM openmicroscopy/omero-web:latest
 MAINTAINER ome-devel@lists.openmicroscopy.org.uk
 
 USER root
-RUN /opt/omero/web/venv/bin/pip install 'whitenoise<4' && \
-    echo "config append -- omero.web.middleware '{\"index\": 0, \"class\": \"whitenoise.middleware.WhiteNoiseMiddleware\"}'" > /opt/omero/web/config/whitenoise.omero
+
+RUN /opt/omero/web/venv/bin/pip install \
+        django-cors-headers \
+        omero-figure \
+        omero-fpbioimage \
+        omero-iviewer \
+        omero-mapr \
+        omero-parade \
+        omero-webtagging-autotag \
+        omero-webtagging-tagsearch \
+        'whitenoise<4'
+
+ADD 01-default-webapps.omero /opt/omero/web/config/
+
 USER omero-web

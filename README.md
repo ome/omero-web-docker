@@ -12,6 +12,19 @@ The quickest way to obtain a running OMERO.web server is to use
 the [standalone image](https://hub.docker.com/r/openmicroscopy/omero-web-standalone/)
 which uses the [WhiteNoise package](http://whitenoise.evans.io/en/stable/)
 to avoid the need for Nginx.
+This image also includes these OMERO.web plugins with a default configuration:
+- [figure](https://www.openmicroscopy.org/omero/figure/)
+- [iviewer](https://www.openmicroscopy.org/omero/iviewer/)
+- [mapr](https://pypi.org/project/omero-mapr/)
+- [parade](https://pypi.org/project/omero-parade/)
+
+The following plugins are installed but disabled:
+- [fpbioimage](https://pypi.org/project/omero-fpbioimage/)
+- [autotag](https://pypi.org/project/omero-webtagging-autotag/)
+- [tagsearch](https://pypi.org/project/omero-webtagging-tagsearch/)
+
+To enable them or to change the configuration of a default plugin see the relevant plugin documentation.
+
 
 To run the Docker image you can set a single OMERO.server to connect to by defining `OMEROHOST`:
 
