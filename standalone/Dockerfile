@@ -3,10 +3,7 @@ MAINTAINER ome-devel@lists.openmicroscopy.org.uk
 
 USER root
 
-RUN yum install -y -q \
-        python-markdown \
-        python-reportlab && \
-    /opt/omero/web/venv/bin/pip install \
+RUN /opt/omero/web/venv/bin/pip install \
         django-cors-headers \
         omero-figure \
         omero-fpbioimage \
