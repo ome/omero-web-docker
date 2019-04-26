@@ -60,7 +60,7 @@ endif
 ifndef BUILD
 	$(eval BUILD=0)
 endif
-	docker build -t $(REPO)/omero-web:latest .
+	docker build $(BUILDARGS) -t $(REPO)/omero-web:latest .
 	docker tag $(REPO)/omero-web:latest $(REPO)/omero-web:$(VERSION)-$(BUILD)
 	docker tag $(REPO)/omero-web:latest $(REPO)/omero-web:$(VERSION)
 	@MAJOR_MINOR=$(shell echo $(VERSION) | cut -f1-2 -d. );\
