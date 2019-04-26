@@ -66,6 +66,8 @@ endif
 	@MAJOR_MINOR=$(shell echo $(VERSION) | cut -f1-2 -d. );\
 	docker tag $(REPO)/omero-web:latest $(REPO)/omero-web:$$MAJOR_MINOR
 
+	perl -i -pe 's%FROM\s.+%FROM $(REPO)/omero-web:latest%' standalone/Dockerfile
+
 	docker build -t $(REPO)/omero-web-standalone:latest standalone
 	docker tag $(REPO)/omero-web-standalone:latest $(REPO)/omero-web-standalone:$(VERSION)-$(BUILD)
 	docker tag $(REPO)/omero-web-standalone:latest $(REPO)/omero-web-standalone:$(VERSION)
