@@ -3,7 +3,7 @@
 set -e
 set -u
 
-PREFIX=${TRAVIS_BRANCH:-test}
+export PREFIX=${TRAVIS_BRANCH:-test}
 if [ -n "${DOCKER_USERNAME:-}" -a -z "${REPO:-}" ]; then
     REPO="${DOCKER_USERNAME}"
 else
