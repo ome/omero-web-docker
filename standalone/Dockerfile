@@ -1,4 +1,5 @@
-FROM openmicroscopy/omero-web:latest
+ARG PARENT_IMAGE=openmicroscopy/omero-web:latest
+FROM ${PARENT_IMAGE}
 MAINTAINER ome-devel@lists.openmicroscopy.org.uk
 
 USER root
