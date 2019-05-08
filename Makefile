@@ -60,13 +60,13 @@ endif
 ifndef BUILD
 	$(eval BUILD=0)
 endif
-	docker build -t $(REPO)/omero-web:latest .
+	docker build $(BUILDARGS) -t $(REPO)/omero-web:latest .
 	docker tag $(REPO)/omero-web:latest $(REPO)/omero-web:$(VERSION)-$(BUILD)
 	docker tag $(REPO)/omero-web:latest $(REPO)/omero-web:$(VERSION)
 	@MAJOR_MINOR=$(shell echo $(VERSION) | cut -f1-2 -d. );\
 	docker tag $(REPO)/omero-web:latest $(REPO)/omero-web:$$MAJOR_MINOR
 
-	docker build -t $(REPO)/omero-web-standalone:latest standalone
+	docker build --build-arg=PARENT_IMAGE=$(REPO)/omero-web:$(VERSION) -t $(REPO)/omero-web-standalone:latest standalone
 	docker tag $(REPO)/omero-web-standalone:latest $(REPO)/omero-web-standalone:$(VERSION)-$(BUILD)
 	docker tag $(REPO)/omero-web-standalone:latest $(REPO)/omero-web-standalone:$(VERSION)
 	@MAJOR_MINOR=$(shell echo $(VERSION) | cut -f1-2 -d. );\

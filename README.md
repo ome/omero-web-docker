@@ -72,3 +72,20 @@ Exposed ports
 -------------
 
 - 4080
+
+
+Development
+-----------
+
+You can use this repository to build a custom image for testing development builds of OMERO.web.
+For example, to install OMERO.web from the `OMERO-build` CI job:
+
+    make VERSION=test REPO=test BUILDARGS="\
+        --build-arg OMEGO_ADDITIONAL_ARGS=--ci=https://web-proxy.openmicroscopy.org/west-ci/ \
+        --build-arg=OMERO_VERSION=OMERO-build" docker-build
+
+    docker run -d --name test-web \
+        -e CONFIG_omero_web_server__list='[["eel.openmicroscopy.org", 4064, "eel"]]' \
+        -e CONFIG_omero_web_debug=true \
+        -p 4080:4080 \
+        test/omero-web-standalone:latest

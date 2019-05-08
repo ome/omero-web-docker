@@ -1,10 +1,11 @@
-FROM openmicroscopy/omero-web:latest
+ARG PARENT_IMAGE=openmicroscopy/omero-web:latest
+FROM ${PARENT_IMAGE}
 MAINTAINER ome-devel@lists.openmicroscopy.org.uk
 
 USER root
 
 RUN /opt/omero/web/venv/bin/pip install \
-        django-cors-headers \
+        django-cors-headers==2.4.1 \
         omero-figure \
         omero-fpbioimage \
         omero-iviewer \
