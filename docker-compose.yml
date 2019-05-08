@@ -1,0 +1,26 @@
+version: "3.3"
+#
+# Compose for the development of this docker image
+#
+services:
+
+  parent:
+    image: ${REPO}/omero-web:${PREFIX}
+    build:
+      context: .
+      args:
+        - OMEGO_ADDITIONAL_ARGS="--ci=https://merge-ci.openmicroscopy.org/jenkins/"
+        - OMERO_VERSION="OMERO-build"
+    entrypoint: "true"
+
+  web:
+    image: ${REPO}/omero-web-standalone:${PREFIX}
+    build:
+      context: standalone
+      args:
+        - PARENT_IMAGE=${REPO}/omero-web:${PREFIX}
+    environment:
+      - CONFIG_omero_web_debug="true"
+      - CONFIG_omero_web_server__list=${SERVERS}
+    ports:
+      - 4080:4080
