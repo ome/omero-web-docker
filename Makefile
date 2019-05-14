@@ -1,4 +1,4 @@
-RELEASE = $(shell date)
+RELEASE = $(shell date -u +%Y-%m-%dT%H:%M:%SZ)
 COMMIT = $(shell git rev-parse HEAD || echo -n NOTGIT)
 
 SHELL = bash
