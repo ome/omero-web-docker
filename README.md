@@ -5,6 +5,13 @@ A CentOS 7 based Docker image for OMERO.web.
 
 Also see [SUPPORT.md](./SUPPORT.md)
 
+Running OMERO with docker-compose
+---------------------------------
+
+ The [omero-deployment-examples repository](https://github.com/ome/omero-deployment-examples/) repository
+contains a number of different ways of deployment OMERO. Unless you are looking for something
+specific, *we suggest starting with [docker-example-omero](https://github.com/ome/docker-example-omero).*
+
 Standalone image: omero-web-standalone
 --------------------------------------
 
