@@ -10,7 +10,7 @@ from re import sub
 
 
 CONFIG_OMERO = '/opt/omero/web/config/omero-web-config-update.sh'
-OMERO = '/opt/omero/web/OMERO.web/bin/omero'
+OMERO = '/opt/omero/web/venv/bin/omero'
 
 if os.access(CONFIG_OMERO, os.X_OK):
     rc = call([CONFIG_OMERO])
