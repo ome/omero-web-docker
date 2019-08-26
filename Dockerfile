@@ -34,10 +34,9 @@ ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
 
 USER root
 RUN rm -rf /opt/omero/web/OMERO.web/lib/python/*
-RUN /opt/omero/web/venv/bin/pip install https://github.com/joshmoore/omero-py/archive/web.py.zip
-ARG t=1
-RUN echo ${t}
-RUN /opt/omero/web/venv/bin/pip install https://github.com/joshmoore/omero-web/archive/py2.zip
+RUN /opt/omero/web/venv/bin/pip install https://github.com/snoopycrimecop/omero-py/archive/merge_ci.zip
+RUN /opt/omero/web/venv/bin/pip install https://github.com/snoopycrimecop/omero-web/archive/merge_ci.zip
+RUN /opt/omero/web/venv/bin/pip install https://github.com/snoopycrimecop/omero-marshal/archive/merge_ci.zip
 ENV OMERODIR /opt/omero/web/OMERO.web
 ENV OMERO_HOME /opt/omero/web/OMERO.web
 USER omero-web
