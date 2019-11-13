@@ -26,8 +26,7 @@ ADD entrypoint.sh /usr/local/bin/
 ADD 50-config.py 60-default-web-config.sh 98-cleanprevious.sh 99-run.sh /startup/
 
 USER omero-web
-RUN mkdir /opt/omero/web/OMERO.web/var
-RUN sed -i "s/^\(omero\.host\s*=\s*\).*\$/\1omero/" /opt/omero/web/OMERO.web/etc/ice.config
+## FIXME RUN sed -i "s/^\(omero\.host\s*=\s*\).*\$/\1omero/" /opt/omero/web/OMERO.web/etc/ice.config
 
 EXPOSE 4080
 VOLUME ["/opt/omero/web/OMERO.web/var"]
