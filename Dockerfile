@@ -29,4 +29,5 @@ USER omero-web
 EXPOSE 4080
 VOLUME ["/opt/omero/web/OMERO.web/var"]
 
+ENV OMERODIR=/opt/omero/web/OMERO.web/
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
