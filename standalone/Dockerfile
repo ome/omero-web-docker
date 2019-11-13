@@ -5,15 +5,16 @@ MAINTAINER ome-devel@lists.openmicroscopy.org.uk
 USER root
 
 RUN /opt/omero/web/venv3/bin/pip install \
-        django-cors-headers==2.4.1 \
-        omero-figure \
-        omero-fpbioimage \
-        omero-iviewer \
-        omero-mapr \
-        omero-parade \
-        omero-webtagging-autotag \
-        omero-webtagging-tagsearch \
+        django-cors-headers \
+        'omero-figure>=4.2.dev1' \
+        'omero-iviewer>=0.9.0.dev1' \
         'whitenoise<4'
+
+        #omero-fpbioimage \
+        #omero-mapr \
+        #omero-parade \
+        #omero-webtagging-autotag \
+        #omero-webtagging-tagsearch \
 
 ADD 01-default-webapps.omero /opt/omero/web/config/
 
