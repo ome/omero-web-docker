@@ -4,7 +4,7 @@ MAINTAINER ome-devel@lists.openmicroscopy.org.uk
 
 USER root
 
-RUN /opt/omero/web/venv/bin/pip install \
+RUN /opt/omero/web/venv3/bin/pip install \
         django-cors-headers==2.4.1 \
         omero-figure \
         omero-fpbioimage \

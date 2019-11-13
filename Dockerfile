@@ -13,7 +13,7 @@ RUN yum -y install epel-release \
     && yum -y install ansible sudo \
     && ansible-galaxy install -p /opt/setup/roles -r requirements.yml
 
-ARG OMERO_VERSION=latest
+ARG OMERO_VERSION=5.6.0-m1
 ARG OMEGO_ADDITIONAL_ARGS=
 RUN ansible-playbook playbook.yml \
     -e omero_web_release=$OMERO_VERSION \

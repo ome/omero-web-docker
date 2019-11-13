@@ -1,19 +1,14 @@
 # External Ansible roles required by this repository
 
-- src: openmicroscopy.basedeps
-  version: 1.0.1
-
-- src: openmicroscopy.ice
-  version: 2.1.1
-
-- src: openmicroscopy.omego
-  version: 0.1.1
-
-- src: openmicroscopy.omero-common
-  version: 0.3.0
-
-- src: openmicroscopy.omero-python-deps
+- src: ome.basedeps
   version: 1.1.0
 
-- src: openmicroscopy.omero-web
-  version: 2.0.1
+- src: ome.ice
+  version: 3.1.0
+
+- src: ome.omero_common
+  version: 0.3.2
+
+- name: ome.omero_web
+  src: https://github.com/ome/ansible-role-omero-web/archive/7435f6634afc5d0a281567d9f564f0358fda706f.tar.gz
+  version: 7435f6634afc5d0a281567d9f564f0358fda706f
