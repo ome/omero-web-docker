@@ -21,6 +21,11 @@ usage:
 	@echo "  make VERSION=x.y.z git-push                         #   Push to $(ORIGIN)"
 	@echo "  make VERSION=x.y.z docker-build                     #   Build and tag images for $(REPO) hub repo"
 	@echo "  make VERSION=x.y.z docker-push                      #   Push images to $(REPO) hub repo"
+	@echo " "
+	@echo "  # Dev Release"
+	@echo "  make VERSION=x.y.z git-push                         #   Push to $(ORIGIN)"
+	@echo "  make VERSION=x.y.z docker-build-versions            #   Skips tagging latest"
+	@echo "  make VERSION=x.y.z docker-push-versions             #   Skips pushing latest"
 
 
 git-tag:
@@ -53,41 +58,46 @@ else
 endif
 
 
-docker-build:
+docker-build-versions:
 ifndef VERSION
 	$(error VERSION is undefined)
 endif
 ifndef BUILD
 	$(eval BUILD=0)
 endif
-	docker build $(BUILDARGS) -t $(REPO)/omero-web:latest .
-	docker tag $(REPO)/omero-web:latest $(REPO)/omero-web:$(VERSION)-$(BUILD)
-	docker tag $(REPO)/omero-web:latest $(REPO)/omero-web:$(VERSION)
+	docker build $(BUILDARGS) -t $(REPO)/omero-web:$(VERSION)-$(BUILD) .
+	docker tag $(REPO)/omero-web:$(VERSION)-$(BUILD) $(REPO)/omero-web:$(VERSION)
 	@MAJOR_MINOR=$(shell echo $(VERSION) | cut -f1-2 -d. );\
-	docker tag $(REPO)/omero-web:latest $(REPO)/omero-web:$$MAJOR_MINOR
+	docker tag $(REPO)/omero-web:$(VERSION)-$(BUILD) $(REPO)/omero-web:$$MAJOR_MINOR
 
-	docker build --build-arg=PARENT_IMAGE=$(REPO)/omero-web:$(VERSION) -t $(REPO)/omero-web-standalone:latest standalone
-	docker tag $(REPO)/omero-web-standalone:latest $(REPO)/omero-web-standalone:$(VERSION)-$(BUILD)
-	docker tag $(REPO)/omero-web-standalone:latest $(REPO)/omero-web-standalone:$(VERSION)
+	docker build --build-arg=PARENT_IMAGE=$(REPO)/omero-web:$(VERSION) -t $(REPO)/omero-web-standalone:$(VERSION)-$(BUILD) standalone
+	docker tag $(REPO)/omero-web-standalone:$(VERSION)-$(BUILD) $(REPO)/omero-web-standalone:$(VERSION)
 	@MAJOR_MINOR=$(shell echo $(VERSION) | cut -f1-2 -d. );\
-	docker tag $(REPO)/omero-web-standalone:latest $(REPO)/omero-web-standalone:$$MAJOR_MINOR
+	docker tag $(REPO)/omero-web-standalone:$(VERSION)-$(BUILD) $(REPO)/omero-web-standalone:$$MAJOR_MINOR
 
 
-docker-push:
+docker-build: docker-build-versions
+	docker tag $(REPO)/omero-web:$(VERSION)-$(BUILD) $(REPO)/omero-web:latest
+	docker tag $(REPO)/omero-web-standalone:$(VERSION)-$(BUILD) $(REPO)/omero-web-standalone:latest
+
+
+docker-push-versions:
 ifndef VERSION
 	$(error VERSION is undefined)
 endif
 ifndef BUILD
 	$(eval BUILD=0)
 endif
-	docker push $(REPO)/omero-web:latest
 	docker push $(REPO)/omero-web:$(VERSION)-$(BUILD)
 	docker push $(REPO)/omero-web:$(VERSION)
 	@MAJOR_MINOR=$(shell echo $(VERSION) | cut -f1-2 -d. );\
 	docker push $(REPO)/omero-web:$$MAJOR_MINOR
 
-	docker push $(REPO)/omero-web-standalone:latest
 	docker push $(REPO)/omero-web-standalone:$(VERSION)-$(BUILD)
 	docker push $(REPO)/omero-web-standalone:$(VERSION)
 	@MAJOR_MINOR=$(shell echo $(VERSION) | cut -f1-2 -d. );\
 	docker push $(REPO)/omero-web-standalone:$$MAJOR_MINOR
+
+docker-push: docker-push-versions
+	docker push $(REPO)/omero-web:latest
+	docker push $(REPO)/omero-web-standalone:latest

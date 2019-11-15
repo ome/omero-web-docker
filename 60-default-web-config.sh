@@ -3,7 +3,7 @@
 
 set -eu
 
-omero=/opt/omero/web/OMERO.web/bin/omero
+omero=/opt/omero/web/venv3/bin/omero
 
 OMEROHOST=${OMEROHOST:-}
 if [ -n "$OMEROHOST" ]; then
