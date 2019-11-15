@@ -1,7 +1,9 @@
 FROM centos:centos7
-MAINTAINER ome-devel@lists.openmicroscopy.org.uk
-LABEL org.openmicroscopy.release-date="unknown"
-LABEL org.openmicroscopy.commit="unknown"
+LABEL maintainer="ome-devel@lists.openmicroscopy.org.uk"
+LABEL org.opencontainers.image.created="unknown"
+LABEL org.opencontainers.image.revision="unknown"
+LABEL org.opencontainers.image.source="https://github.com/ome/omero-web-docker"
+
 
 RUN mkdir /opt/setup
 WORKDIR /opt/setup
@@ -11,7 +13,7 @@ RUN yum -y install epel-release \
     && yum -y install ansible sudo \
     && ansible-galaxy install -p /opt/setup/roles -r requirements.yml
 
-ARG OMERO_VERSION=latest
+ARG OMERO_VERSION=5.6.0-m1
 ARG OMEGO_ADDITIONAL_ARGS=
 RUN ansible-playbook playbook.yml \
     -e omero_web_release=$OMERO_VERSION \
@@ -22,14 +24,13 @@ RUN curl -L -o /usr/local/bin/dumb-init \
     chmod +x /usr/local/bin/dumb-init
 ADD entrypoint.sh /usr/local/bin/
 ADD 50-config.py 60-default-web-config.sh 98-cleanprevious.sh 99-run.sh /startup/
+ADD ice.config /opt/omero/web/OMERO.web/etc/
 
 USER omero-web
-RUN mkdir /opt/omero/web/OMERO.web/var
-RUN sed -i "s/^\(omero\.host\s*=\s*\).*\$/\1omero/" /opt/omero/web/OMERO.web/etc/ice.config
-
 EXPOSE 4080
 VOLUME ["/opt/omero/web/OMERO.web/var"]
 
+ENV OMERODIR=/opt/omero/web/OMERO.web/
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
 
 USER root
