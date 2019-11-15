@@ -32,12 +32,3 @@ VOLUME ["/opt/omero/web/OMERO.web/var"]
 
 ENV OMERODIR=/opt/omero/web/OMERO.web/
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
-
-USER root
-RUN rm -rf /opt/omero/web/OMERO.web/lib/python/*
-RUN /opt/omero/web/venv/bin/pip install https://github.com/snoopycrimecop/omero-py/archive/merge_ci.zip
-RUN /opt/omero/web/venv/bin/pip install https://github.com/snoopycrimecop/omero-web/archive/merge_ci.zip
-RUN /opt/omero/web/venv/bin/pip install https://github.com/snoopycrimecop/omero-marshal/archive/merge_ci.zip
-ENV OMERODIR /opt/omero/web/OMERO.web
-ENV OMERO_HOME /opt/omero/web/OMERO.web
-USER omero-web
