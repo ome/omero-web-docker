@@ -9,7 +9,7 @@ from subprocess import call
 from re import sub
 
 
-OMERO = '/opt/omero/web/venv3/bin/omero'
+OMERO = '/opt/omero/web/OMERO.web/bin/omero'
 
 rc = call([OMERO, 'load', '--glob', '/opt/omero/web/config/*.omero'])
 assert rc == 0
