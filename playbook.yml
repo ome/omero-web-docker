@@ -1,7 +1,6 @@
 - hosts: localhost
   roles:
   - role: ome.omero_web
-  - role: ome.java
   vars:
     ice_version: "3.6"
     ice_install_devel: False
