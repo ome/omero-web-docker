@@ -14,7 +14,4 @@ RUN yum install -y -q \
     wget \
     zip
 
-# Shouldn't be necessary any more since OMERO.web/bin/omero is a Python script but included anyway from previous image used in https://github.com/ome/omero-test-infra
-RUN rm /opt/omero/web/OMERO.web/bin/omero && ln -s /opt/omero/web/venv3/bin/omero /opt/omero/web/OMERO.web/bin/omero
-
 USER omero-web
