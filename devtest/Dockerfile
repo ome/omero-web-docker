@@ -12,6 +12,7 @@ RUN yum install -y -q \
     tar \
     unzip \
     wget \
-    zip
+    zip \
+    && yum clean all
 
 USER omero-web

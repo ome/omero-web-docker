@@ -11,11 +11,13 @@ ADD playbook.yml requirements.yml /opt/setup/
 
 RUN yum -y install epel-release \
     && yum -y install ansible sudo \
-    && ansible-galaxy install -p /opt/setup/roles -r requirements.yml
+    && ansible-galaxy install -p /opt/setup/roles -r requirements.yml \
+    && yum clean all
 
 ARG OMERO_WEB_VERSION=5.6.dev7
 RUN ansible-playbook playbook.yml \
-    -e omero_web_release=$OMERO_WEB_VERSION
+    -e omero_web_release=$OMERO_WEB_VERSION \
+    && yum clean all
 
 RUN curl -L -o /usr/local/bin/dumb-init \
     https://github.com/Yelp/dumb-init/releases/download/v1.2.2/dumb-init_1.2.2_amd64 && \
