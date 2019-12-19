@@ -1,13 +1,7 @@
 # External Ansible roles required by this repository
 
-- src: ome.basedeps
-  version: 1.1.0
-
 - src: ome.ice
   version: 3.1.0
-
-- src: ome.java
-  version: 2.0.3
 
 - src: ome.omero_common
   version: 0.3.2
