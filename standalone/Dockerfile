@@ -8,7 +8,7 @@ RUN /opt/omero/web/venv3/bin/pip install \
         django-cors-headers \
         'omero-figure>=4.2.dev1' \
         'omero-iviewer>=0.9.0.dev1' \
-        'whitenoise<4'
+        'whitenoise'
 
         #omero-fpbioimage \
         #omero-mapr \
