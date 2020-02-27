@@ -9,8 +9,14 @@ if [ -n "${DOCKER_USERNAME:-}" -a -z "${REPO:-}" ]; then
 else
     REPO="${REPO:-test}"
 fi
-IMAGE=$REPO/omero-web:$PREFIX
-STANDLONE=$REPO/omero-web-standalone:$PREFIX
+if [ -n "${TRAVIS_TAG:-}" ]; then
+    VERSION="${TRAVIS_TAG%-*}"
+else
+    VERSION=present
+fi
+
+IMAGE=$REPO/omero-web:$VERSION
+STANDLONE=$REPO/omero-web-standalone:$VERSION
 
 CLEAN=${CLEAN:-y}
 
@@ -24,7 +30,7 @@ fi
 
 cleanup || true
 
-make VERSION="$PREFIX" REPO="$REPO" docker-build
+make VERSION="$VERSION" REPO="$REPO" docker-build
 
 docker run -d --name $PREFIX-web \
     -e CONFIG_omero_web_server__list='[["omero.example.org", 4064, "test-omero"]]' \
