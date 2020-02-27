@@ -14,7 +14,7 @@ RUN yum -y install epel-release \
     && ansible-galaxy install -p /opt/setup/roles -r requirements.yml \
     && yum clean all
 
-ARG OMERO_WEB_VERSION=5.6.dev7
+ARG OMERO_WEB_VERSION=present
 RUN ansible-playbook playbook.yml \
     -e omero_web_release=$OMERO_WEB_VERSION \
     && yum clean all
