@@ -5,6 +5,7 @@ MAINTAINER ome-devel@lists.openmicroscopy.org.uk
 USER root
 
 RUN yum install -y -q \
+    git \
     java-1.8.0-openjdk \
     patch \
     redhat-lsb-core \
