@@ -5,7 +5,7 @@ MAINTAINER ome-devel@lists.openmicroscopy.org.uk
 USER root
 
 RUN yum install -y -q \
-    java-1.8.0-openjdk \
+    java-11-openjdk \
     patch \
     redhat-lsb-core \
     rsync \
