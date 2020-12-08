@@ -1,6 +1,8 @@
 OMERO.web Docker
 ================
 
+[![Actions Status](https://github.com/ome/omero-web-docker/workflows/Build/badge.svg)](https://github.com/ome/omero-web-docker/actions)
+
 A CentOS 7 based Docker image for OMERO.web.
 
 Also see [SUPPORT.md](./SUPPORT.md)
