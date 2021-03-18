@@ -1,7 +1,7 @@
 FROM centos:centos7
 LABEL maintainer="ome-devel@lists.openmicroscopy.org.uk"
-LABEL org.opencontainers.image.created="2021-03-17T14:18:04Z"
-LABEL org.opencontainers.image.revision="58ead3a64142b88b99aac9637f0e6ac7f8dd403d"
+LABEL org.opencontainers.image.created="2021-03-18T11:29:30Z"
+LABEL org.opencontainers.image.revision="10103c96024a89cd82e67ac298894f028b24a3b6"
 LABEL org.opencontainers.image.source="https://github.com/ome/omero-web-docker"
 
 
