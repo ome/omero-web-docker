@@ -69,11 +69,15 @@ endif
 	docker tag $(REPO)/omero-web:$(VERSION)-$(BUILD) $(REPO)/omero-web:$(VERSION)
 	@MAJOR_MINOR=$(shell echo $(VERSION) | cut -f1-2 -d. );\
 	docker tag $(REPO)/omero-web:$(VERSION)-$(BUILD) $(REPO)/omero-web:$$MAJOR_MINOR
+	@MAJOR=$(shell echo $(VERSION) | cut -f1 -d. );\
+	docker tag $(REPO)/omero-web:$(VERSION)-$(BUILD) $(REPO)/omero-web:$$MAJOR
 
 	docker build --build-arg=PARENT_IMAGE=$(REPO)/omero-web:$(VERSION) -t $(REPO)/omero-web-standalone:$(VERSION)-$(BUILD) standalone
 	docker tag $(REPO)/omero-web-standalone:$(VERSION)-$(BUILD) $(REPO)/omero-web-standalone:$(VERSION)
 	@MAJOR_MINOR=$(shell echo $(VERSION) | cut -f1-2 -d. );\
 	docker tag $(REPO)/omero-web-standalone:$(VERSION)-$(BUILD) $(REPO)/omero-web-standalone:$$MAJOR_MINOR
+	@MAJOR=$(shell echo $(VERSION) | cut -f1 -d. );\
+	docker tag $(REPO)/omero-web-standalone:$(VERSION)-$(BUILD) $(REPO)/omero-web-standalone:$$MAJOR
 
 
 docker-build: docker-build-versions
@@ -92,11 +96,15 @@ endif
 	docker push $(REPO)/omero-web:$(VERSION)
 	@MAJOR_MINOR=$(shell echo $(VERSION) | cut -f1-2 -d. );\
 	docker push $(REPO)/omero-web:$$MAJOR_MINOR
+	@MAJOR=$(shell echo $(VERSION) | cut -f1 -d. );\
+	docker push $(REPO)/omero-web:$$MAJOR
 
 	docker push $(REPO)/omero-web-standalone:$(VERSION)-$(BUILD)
 	docker push $(REPO)/omero-web-standalone:$(VERSION)
 	@MAJOR_MINOR=$(shell echo $(VERSION) | cut -f1-2 -d. );\
 	docker push $(REPO)/omero-web-standalone:$$MAJOR_MINOR
+	@MAJOR=$(shell echo $(VERSION) | cut -f1 -d. );\
+	docker push $(REPO)/omero-web-standalone:$$MAJOR
 
 docker-push: docker-push-versions
 	docker push $(REPO)/omero-web:latest
