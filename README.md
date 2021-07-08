@@ -50,6 +50,13 @@ Alternative all configuration options can be set using environment variables, fo
         -p 4080:4080 \
         openmicroscopy/omero-web-standalone
 
+The `$OMERODIR` is `/opt/omero/web/OMERO.web/` so you can have the logs written to your host with:
+
+    docker run -d --name omero-web \
+        -e OMEROHOST=omero.example.org \
+        -p 4080:4080 \
+        -v /path/to/host/dir:/opt/omero/web/OMERO.web/var/logs
+        openmicroscopy/omero-web-standalone
 
 Minimal OMERO.web image: omero-web
 ----------------------------------
