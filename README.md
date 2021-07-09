@@ -42,14 +42,16 @@ To run the Docker image you can set a single OMERO.server to connect to by defin
         -p 4080:4080 \
         openmicroscopy/omero-web-standalone
 
-Alternative all configuration options can be set using environment variables, for example:
+Alternatively, all configuration options can be set using environment variables, for example,
+add the following arguments to the command above:
 
-    docker run -d --name omero-web \
         -e CONFIG_omero_web_server__list='[["omero.example.org", 4064, "omero"]]' \
         -e CONFIG_omero_web_debug=true \
-        -p 4080:4080 \
-        openmicroscopy/omero-web-standalone
 
+The `$OMERODIR` is `/opt/omero/web/OMERO.web/` so you can have the logs written to your host
+by adding:
+
+        -v /path/to/host/dir:/opt/omero/web/OMERO.web/var/logs \
 
 Minimal OMERO.web image: omero-web
 ----------------------------------
