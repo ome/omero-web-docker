@@ -13,5 +13,4 @@
   version: 0.3.4
 
 - name: ome.omero_web
-  src: https://github.com/ome/ansible-role-omero-web/archive/5bd0f5985b6a3d7fc6bfb2dc35db2e463e7d952f.tar.gz
   version: 4.0.1
