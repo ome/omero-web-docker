@@ -19,8 +19,8 @@ jobs:
     if: startsWith(github.ref, 'refs/tags')
     runs-on: ubuntu-latest
     env:
-      name: jburel/omero-web
-      nameStandalone: jburel/omero-web-standalone
+      name: openmicroscopy/omero-web
+      nameStandalone: openmicroscopy/omero-web-standalone
     steps:
       - name: Get other tags
         id: gettags
