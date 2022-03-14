@@ -41,7 +41,7 @@ jobs:
         uses: jupyterhub/action-major-minor-tag-calculator@v2.0.0
         with:
           githubToken: ${{ secrets.GITHUB_TOKEN }}
-          prefix: "${{ env.nameStandalone }}"
+          prefix: "${{ env.nameStandalone }}:"
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
       - name: Login to DockerHub
