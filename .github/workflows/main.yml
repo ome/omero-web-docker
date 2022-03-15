@@ -20,7 +20,6 @@ jobs:
     runs-on: ubuntu-latest
     env:
       name: openmicroscopy/omero-web
-      nameStandalone: openmicroscopy/omero-web-standalone
     steps:
       - name: Get other tags
         id: gettags
@@ -28,12 +27,6 @@ jobs:
         with:
           githubToken: ${{ secrets.GITHUB_TOKEN }}
           prefix: "${{ env.name}}:"
-      - name: Get other tags
-        id: getstandalonetags
-        uses: jupyterhub/action-major-minor-tag-calculator@v2.0.0
-        with:
-          githubToken: ${{ secrets.GITHUB_TOKEN }}
-          prefix: "${{ env.nameStandalone }}:"
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
       - name: Login to DockerHub
@@ -44,5 +37,30 @@ jobs:
       - name: Push to Docker Hub
         uses: docker/build-push-action@v2
         with:
-          tags: ${{ join(fromJson(steps.gettags.outputs.tags)) }}, ${{ join(fromJson(steps.getstandalonetags.outputs.tags)) }}
+          tags: ${{ join(fromJson(steps.gettags.outputs.tags)) }}
           push: true
+  uploadstandalone:
+      needs: upload
+      if: startsWith(github.ref, 'refs/tags')
+      runs-on: ubuntu-latest
+      env:
+        name: openmicroscopy/omero-web-standalone
+        nameParent: openmicroscopy/omero-web
+      steps:
+        - name: Get other tags
+          id: gettags
+          uses: jupyterhub/action-major-minor-tag-calculator@v2.0.0
+          with:
+            githubToken: ${{ secrets.GITHUB_TOKEN }}
+            prefix: "${{ env.name}}:"
+        - name: Login to DockerHub
+          uses: docker/login-action@v1
+          with:
+            username: ${{ secrets.DOCKER_USERNAME }}
+            password: ${{ secrets.DOCKER_PASSWORD }}
+        - name: Push to Docker Hub
+          uses: docker/build-push-action@v2
+          with:
+            context: "{{defaultContext}}:standalone"
+            tags: ${{ join(fromJson(steps.gettags.outputs.tags)) }}
+            push: true
