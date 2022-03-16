@@ -25,6 +25,16 @@ jobs:
             tag: ${{ steps.findTag.outputs.tag }}
         env:
            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Check if it is a prerelease or not
+        run: |
+            if [[ "${{ steps.findTag.outputs.tag }}" == *"rc"* ]]; then
+              echo "::set-output name=PRERELEASE::true"
+            else
+              echo "::set-output name=PRERELEASE::false"
+            fi 
+        id: prerelease
+      - run: |
+           echo ${{ steps.prerelease.outputs.PRERELEASE }}
       - name: Create and push tag
         if: ${{ steps.checkTag.outputs.exists }}  == false 
         uses: actions/create-release@latest
@@ -34,4 +44,4 @@ jobs:
           tag_name: ${{ steps.findTag.outputs.tag }}
           release_name: "Release ${{ steps.findTag.outputs.tag }}"
           draft: false
-          prerelease: contains(${{ steps.findTag.outputs.tag }}, 'rc')
+          prerelease: ${{ steps.prerelease.outputs.PRERELEASE }}
