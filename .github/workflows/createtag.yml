@@ -1,0 +1,37 @@
+---
+name: Create
+
+on: 
+  push:
+  schedule:
+    - cron: '0 0 * * 0'
+
+jobs:
+  find:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Find tag
+        uses: oprypin/find-latest-tag@v1
+        id: findTag
+        with:
+          repository: ome/omero-web
+      - name: display
+        run: |
+          echo "${{ steps.findTag.outputs.tag }}"
+      - name: Check if the tag exists already or not
+        uses: mukunku/tag-exists-action@v1.0.0
+        id: checkTag
+        with: 
+            tag: ${{ steps.findTag.outputs.tag }}
+        env:
+           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Create and push tag
+        if: ${{ steps.checkTag.outputs.exists }}  == false 
+        uses: actions/create-release@latest
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ steps.findTag.outputs.tag }}
+          release_name: "Release ${{ steps.findTag.outputs.tag }}"
+          draft: false
+          prerelease: contains(${{ steps.findTag.outputs.tag }}, 'rc')
