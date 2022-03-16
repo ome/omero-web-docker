@@ -15,9 +15,6 @@ jobs:
         id: findTag
         with:
           repository: ome/omero-web
-      - name: display
-        run: |
-          echo "${{ steps.findTag.outputs.tag }}"
       - name: Check if the tag exists already or not
         uses: mukunku/tag-exists-action@v1.0.0
         id: checkTag
@@ -33,15 +30,13 @@ jobs:
               echo "::set-output name=PRERELEASE::false"
             fi 
         id: prerelease
-      - run: |
-           echo ${{ steps.prerelease.outputs.PRERELEASE }}
       - name: Create and push tag
-        if: ${{ steps.checkTag.outputs.exists }}  == false 
-        uses: actions/create-release@latest
+        if: "${{ steps.checkTag.outputs.exists == 'false' }}"
+        uses: ncipollo/release-action@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{ steps.findTag.outputs.tag }}
-          release_name: "Release ${{ steps.findTag.outputs.tag }}"
+          tag: ${{ steps.findTag.outputs.tag }}
+          name: "Release ${{ steps.findTag.outputs.tag }}"
           draft: false
           prerelease: ${{ steps.prerelease.outputs.PRERELEASE }}
