@@ -29,6 +29,9 @@ jobs:
               echo "::set-output name=PRERELEASE::false"
             fi 
         id: prerelease
+      - name: Build
+        if: "${{ steps.checkTag.outputs.exists == 'false' }}"
+        run: ./build.sh
       - name: Create and push tag
         if: "${{ steps.checkTag.outputs.exists == 'false' }}"
         uses: ncipollo/release-action@v1
