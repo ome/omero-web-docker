@@ -5,7 +5,6 @@ MAINTAINER ome-devel@lists.openmicroscopy.org.uk
 USER root
 
 RUN /opt/omero/web/venv3/bin/pip install \
-        'django-cors-headers<3.3' \
         omero-figure \
         omero-iviewer \
         omero-fpbioimage \
