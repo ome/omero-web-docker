@@ -29,6 +29,8 @@ This image also includes these OMERO.web plugins with a default configuration:
 
 The following plugins are installed but disabled:
 - [fpbioimage](https://pypi.org/project/omero-fpbioimage/)
+- [autotag](https://pypi.org/project/omero-webtagging-autotag/)
+- [tagsearch](https://pypi.org/project/omero-webtagging-tagsearch/)
 
 To enable them or to change the configuration of a default plugin see the relevant plugin documentation.
 
