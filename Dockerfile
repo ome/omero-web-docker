@@ -8,9 +8,13 @@ ADD playbook.yml requirements.yml /opt/setup/
 
 RUN yum -y install epel-release \
     && yum -y install ansible sudo \
-    && ansible-galaxy install -p /opt/setup/roles -r requirements.yml
+    && ansible-galaxy install -p /opt/setup/roles -r requirements.yml \
+    && yum -y clean all \
+    && rm -fr /var/cache
 
-RUN ansible-playbook playbook.yml
+RUN ansible-playbook playbook.yml \
+    && yum -y clean all \
+    && rm -fr /var/cache
 
 RUN curl -L -o /usr/local/bin/dumb-init \
     https://github.com/Yelp/dumb-init/releases/download/v1.2.0/dumb-init_1.2.0_amd64 && \
