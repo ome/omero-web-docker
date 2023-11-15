@@ -10,13 +10,15 @@ RUN dnf -y install epel-release
 RUN dnf install -y glibc-langpack-en
 ENV LANG en_US.utf-8
 
-RUN dnf -y install ansible sudo \
-    && ansible-galaxy install -p /opt/setup/roles -r requirements.yml \
+RUN dnf -y install ansible sudo
+
+
+RUN ansible-galaxy install -p /opt/setup/roles -r requirements.yml \
     && dnf -y clean all \
     && rm -fr /var/cache
 
-RUN ansible-playbook playbook.yml \
-    && yum -y clean all \
+RUN ansible-playbook playbook.yml -e 'ansible_python_interpreter=/usr/bin/python3' \
+    && dnf -y clean all \
     && rm -fr /var/cache
 
 RUN curl -L -o /usr/local/bin/dumb-init \
