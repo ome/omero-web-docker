@@ -1,11 +1,14 @@
 FROM rockylinux:9
 LABEL maintainer="ome-devel@lists.openmicroscopy.org.uk"
 
-ENV LANG en_US.utf-8
 
 RUN mkdir /opt/setup
 WORKDIR /opt/setup
 ADD playbook.yml requirements.yml /opt/setup/
+
+RUN dnf -y install epel-release
+RUN dnf install -y glibc-langpack-en
+ENV LANG en_US.utf-8
 
 RUN dnf -y install ansible sudo \
     && ansible-galaxy install -p /opt/setup/roles -r requirements.yml \
