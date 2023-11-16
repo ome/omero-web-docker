@@ -7,8 +7,5 @@
 - src: ome.java
   version: 2.2.0
 
-- src: ome.omero_common
-  version: 0.4.0
-
 - name: ome.omero_web
   version: 5.0.0
