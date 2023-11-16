@@ -21,8 +21,9 @@ RUN ansible-playbook playbook.yml -e 'ansible_python_interpreter=/usr/bin/python
     && dnf -y clean all \
     && rm -fr /var/cache
 
+
 RUN curl -L -o /usr/local/bin/dumb-init \
-    https://github.com/Yelp/dumb-init/releases/download/v1.2.5/dumb-init_1.2.5_amd64 && \
+    https://github.com/Yelp/dumb-init/releases/download/v1.2.5/dumb-init_1.2.5_x86_64 && \
     chmod +x /usr/local/bin/dumb-init
 ADD entrypoint.sh /usr/local/bin/
 ADD 50-config.py 60-default-web-config.sh 98-cleanprevious.sh 99-run.sh /startup/
