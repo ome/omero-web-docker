@@ -1,25 +1,23 @@
-FROM centos:centos7.9.2009@sha256:be65f488b7764ad3638f236b7b515b3678369a5124c47b8d32916d6487418ea4
+FROM ubuntu:22.04
 LABEL maintainer="ome-devel@lists.openmicroscopy.org.uk"
 
 ENV LANG en_US.utf-8
+ENV DEBIAN_FRONTEND=noninteractive
 
 RUN mkdir /opt/setup
 WORKDIR /opt/setup
 ADD playbook.yml requirements.yml /opt/setup/
 
-RUN yum -y install epel-release \
-    && yum -y install ansible sudo \
+RUN apt update \
+    && apt -y install ansible sudo dumb-init \
     && ansible-galaxy install -p /opt/setup/roles -r requirements.yml \
-    && yum -y clean all \
-    && rm -fr /var/cache
+    && apt -y autoclean autoremove \
+    && rm -fr /var/lib/apt/lists/* /tmp/*
 
 RUN ansible-playbook playbook.yml \
-    && yum -y clean all \
-    && rm -fr /var/cache
+    && apt -y autoclean autoremove \
+    && rm -fr /var/lib/apt/lists/* /tmp/*
 
-RUN curl -L -o /usr/local/bin/dumb-init \
-    https://github.com/Yelp/dumb-init/releases/download/v1.2.0/dumb-init_1.2.0_amd64 && \
-    chmod +x /usr/local/bin/dumb-init
 ADD entrypoint.sh /usr/local/bin/
 ADD 50-config.py 60-default-web-config.sh 98-cleanprevious.sh 99-run.sh /startup/
 ADD ice.config /opt/omero/web/OMERO.web/etc/
