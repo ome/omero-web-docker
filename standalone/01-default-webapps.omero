@@ -20,5 +20,14 @@ config append -- omero.web.mapr.config '{"menu": "anyvalue", "config":{"default"
 config append -- omero.web.apps '"omero_parade"'
 config append -- omero.web.ui.center_plugins '["Parade", "omero_parade/init.js.html", "omero_parade"]'
 
+# Add autotag to webclient
+config append omero.web.apps '"omero_autotag"'
+config append omero.web.ui.center_plugins '["Auto Tag", "omero_autotag/auto_tag_init.js.html", "auto_tag_panel"]'
+
+# Add tagsearch to webclient
+config append omero.web.apps '"omero_tagsearch"'
+
 # Top links
 config set -- omero.web.ui.top_links '[["Data", "webindex", {"title": "Browse Data via Projects, Tags etc"}],["History", "history", {"title": "History"}], ["Mapr", {"viewname": "maprindex_anyvalue"}, {"title": "Find Any Value"}], ["Figure", "figure_index", {"title": "Open Figure in new tab", "target": "_blank"}], ["Help", "https://help.openmicroscopy.org/", {"title":"Open OMERO user guide in a new tab", "target":"new"}]]'
+
+config append omero.web.ui.top_links '["Tag Search", "tagsearch"]'
