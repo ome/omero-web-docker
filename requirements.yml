@@ -1,9 +1,4 @@
 # External Ansible roles required by this repository
-
-- name: ome.basedeps
-  src: https://github.com/pwalczysko/ansible-role-basedeps/
-  version: fix-repo-rhel
-
 - src: ome.java
   version: 2.2.0
 
