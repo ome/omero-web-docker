@@ -1,3 +1,5 @@
 # External Ansible roles required by this repository
 
+- name: ome.basedeps
+- name: ome.java
 - name: ome.omero_web
