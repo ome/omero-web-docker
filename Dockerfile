@@ -10,7 +10,7 @@ RUN dnf -y install epel-release
 RUN dnf install -y glibc-langpack-en
 ENV LANG en_US.utf-8
 
-RUN dnf -y install ansible sudo
+RUN dnf -y install ansible-core sudo
 
 
 RUN ansible-galaxy install -p /opt/setup/roles -r requirements.yml \
