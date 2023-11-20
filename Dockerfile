@@ -11,7 +11,7 @@ RUN dnf install -y glibc-langpack-en
 ENV LANG en_US.utf-8
 
 RUN dnf -y install ansible-core sudo
-
+RUN ansible-galaxy collection install ansible.posix
 
 RUN ansible-galaxy install -p /opt/setup/roles -r requirements.yml \
     && dnf -y clean all \
