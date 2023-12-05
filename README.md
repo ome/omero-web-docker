@@ -37,7 +37,7 @@ To enable them or to change the configuration of a default plugin see the releva
 
 To run the Docker image you can set a single OMERO.server to connect to by defining `OMEROHOST`:
 
-    docker run -d --name omero-web \
+    docker run -d --name omero-web-standalone \
         -e OMEROHOST=omero.example.org \
         -p 4080:4080 \
         openmicroscopy/omero-web-standalone
