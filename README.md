@@ -10,7 +10,7 @@ Also see [SUPPORT.md](./SUPPORT.md)
 Running OMERO with docker-compose
 ---------------------------------
 
- The [omero-deployment-examples repository](https://github.com/ome/omero-deployment-examples/) repository
+The [omero-deployment-examples repository](https://github.com/ome/omero-deployment-examples/) repository
 contains a number of different ways of deployment OMERO. Unless you are looking for something
 specific, *we suggest starting with [docker-example-omero](https://github.com/ome/docker-example-omero).*
 
@@ -26,11 +26,12 @@ This image also includes these OMERO.web plugins with a default configuration:
 - [iviewer](https://www.openmicroscopy.org/omero/iviewer/)
 - [mapr](https://pypi.org/project/omero-mapr/)
 - [parade](https://pypi.org/project/omero-parade/)
+- [autotag](https://pypi.org/project/omero-autotag/)
+- [tagsearch](https://pypi.org/project/omero-webtagging-tagsearch)
 
 The following plugins are installed but disabled:
 - [fpbioimage](https://pypi.org/project/omero-fpbioimage/)
-- [autotag](https://pypi.org/project/omero-autotag/)
-- [tagsearch](https://pypi.org/project/omero-webtagging-tagsearch)
+
 
 To enable them or to change the configuration of a default plugin see the relevant plugin documentation.
 
