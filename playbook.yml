@@ -3,10 +3,6 @@
   - role: ome.omero_web
   - role: ome.java
   vars:
-    ice_version: "3.6"
-    ice_install_devel: False
-    ice_install_python: False
-    ice_python_wheel: https://github.com/ome/zeroc-ice-py-centos7/releases/download/0.1.0/zeroc_ice-3.6.4-cp27-cp27mu-linux_x86_64.whl
     omero_web_systemd_setup: False
     omero_web_setup_nginx: False
     # These defaults can be overriden at runtime
