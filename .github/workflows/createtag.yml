@@ -1,0 +1,44 @@
+---
+name: Create
+
+on:
+  schedule:
+    - cron: '0 0 * * 0'
+
+jobs:
+  find:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Find tag
+        uses: oprypin/find-latest-tag@v1
+        id: findTag
+        with:
+          repository: ome/omero-web
+      - name: Check if the tag exists already or not
+        uses: mukunku/tag-exists-action@v1.0.0
+        id: checkTag
+        with: 
+            tag: ${{ steps.findTag.outputs.tag }}
+        env:
+           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Check if it is a prerelease or not
+        run: |
+            if [[ "${{ steps.findTag.outputs.tag }}" == *"rc"* ]]; then
+              echo "::set-output name=PRERELEASE::true"
+            else
+              echo "::set-output name=PRERELEASE::false"
+            fi 
+        id: prerelease
+      - name: Build
+        if: "${{ steps.checkTag.outputs.exists == 'false' }}"
+        run: ./build.sh
+      - name: Create and push tag
+        if: "${{ steps.checkTag.outputs.exists == 'false' }}"
+        uses: ncipollo/release-action@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag: ${{ steps.findTag.outputs.tag }}
+          name: "Release ${{ steps.findTag.outputs.tag }}"
+          draft: false
+          prerelease: ${{ steps.prerelease.outputs.PRERELEASE }}
