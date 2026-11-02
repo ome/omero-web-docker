@@ -26,6 +26,14 @@ cleanup || true
 
 make VERSION="$PREFIX" REPO="$REPO" docker-build
 
+echo show virtual environment pip version
+
+docker run --rm --entrypoint /bin/sh $STANDALONE -c '/opt/omero/web/venv3/bin/python -m pip --version'
+
+echo show certifi version
+
+docker run --rm --entrypoint /bin/sh $STANDALONE -c '/opt/omero/web/venv3/bin/python -m pip show certifi'
+
 docker run -d --name $PREFIX-web \
     -e CONFIG_omero_web_server__list='[["omero.example.org", 4064, "test-omero"]]' \
     -e CONFIG_omero_web_debug=true \
